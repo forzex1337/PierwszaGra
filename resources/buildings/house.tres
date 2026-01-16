@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BuildingData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/building_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "house"
+display_name = "Dom"
+description = "Mały dom mieszkalny dla 4 osób"
+building_type = "residential"
+color = Color(0.2, 0.6, 0.2, 1)
+footprint = Vector2i(1, 1)
+cost = 500
+upkeep = 5
+population_capacity = 4
+jobs_capacity = 0
+happiness_bonus = 0.0
+requires_road = true
+min_population = 0

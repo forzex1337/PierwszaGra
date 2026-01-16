@@ -1,0 +1,227 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmx8q6rn4h7vp"]
+
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/ui/build_menu.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/ui/building_info.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/ui/message_popup.gd" id="4"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1")
+
+[node name="TopBar" type="HBoxContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 60.0
+grow_horizontal = 2
+theme_override_constants/separation = 20
+
+[node name="MoneyIcon" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+text = "Kasa:"
+
+[node name="MoneyLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+text = "$10000"
+
+[node name="Separator1" type="VSeparator" parent="HUD/TopBar"]
+layout_mode = 2
+
+[node name="PopIcon" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+text = "Pop:"
+
+[node name="PopulationLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+text = "0/0"
+
+[node name="Separator2" type="VSeparator" parent="HUD/TopBar"]
+layout_mode = 2
+
+[node name="JobsIcon" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+text = "Praca:"
+
+[node name="JobsLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+text = "0/0"
+
+[node name="Separator3" type="VSeparator" parent="HUD/TopBar"]
+layout_mode = 2
+
+[node name="HappyIcon" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+text = "Szcz:"
+
+[node name="HappinessLabel" type="Label" parent="HUD/TopBar"]
+layout_mode = 2
+text = "50%"
+
+[node name="BuildButton" type="Button" parent="HUD"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -80.0
+offset_right = 100.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "BUDUJ"
+
+[node name="BuildMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2")
+
+[node name="Panel" type="Panel" parent="BuildMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -200.0
+offset_right = 150.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BuildMenu/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="BuildMenu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Wybierz budynek"
+horizontal_alignment = 1
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="BuildMenu/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DemolishButton" type="Button" parent="BuildMenu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "WYBURZ"
+
+[node name="CloseButton" type="Button" parent="BuildMenu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Zamknij"
+
+[node name="BuildingInfo" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3")
+
+[node name="Panel" type="Panel" parent="BuildingInfo"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BuildingInfo/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="BuildingInfo/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Nazwa budynku"
+horizontal_alignment = 1
+
+[node name="InfoLabel" type="Label" parent="BuildingInfo/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Informacje..."
+autowrap_mode = 2
+
+[node name="DemolishButton" type="Button" parent="BuildingInfo/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Wyburz"
+
+[node name="CloseButton" type="Button" parent="BuildingInfo/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Zamknij"
+
+[node name="MessagePopup" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4")
+
+[node name="Panel" type="Panel" parent="MessagePopup"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 100.0
+offset_right = 150.0
+offset_bottom = 160.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="MessagePopup/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Wiadomość"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="MessagePopup"]
+one_shot = true

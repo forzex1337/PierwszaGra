@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BuildingData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/building_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "road"
+display_name = "Droga"
+description = "Podstawowa droga łącząca budynki"
+building_type = "road"
+color = Color(0.4, 0.4, 0.4, 1)
+footprint = Vector2i(1, 1)
+cost = 10
+upkeep = 0
+population_capacity = 0
+jobs_capacity = 0
+happiness_bonus = 0.0
+requires_road = false
+min_population = 0

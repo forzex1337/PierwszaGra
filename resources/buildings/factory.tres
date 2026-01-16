@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BuildingData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/building_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "factory"
+display_name = "Fabryka"
+description = "Zakład przemysłowy tworzący miejsca pracy"
+building_type = "industrial"
+color = Color(0.6, 0.4, 0.2, 1)
+footprint = Vector2i(2, 2)
+cost = 2000
+upkeep = 30
+population_capacity = 0
+jobs_capacity = 20
+happiness_bonus = -5.0
+requires_road = true
+min_population = 0

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BuildingData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/building_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "shop"
+display_name = "Sklep"
+description = "Sklep z usługami zwiększający zadowolenie"
+building_type = "service"
+color = Color(0.2, 0.4, 0.8, 1)
+footprint = Vector2i(1, 1)
+cost = 800
+upkeep = 15
+population_capacity = 0
+jobs_capacity = 5
+happiness_bonus = 10.0
+requires_road = true
+min_population = 0
