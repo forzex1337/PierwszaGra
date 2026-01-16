@@ -24,7 +24,7 @@ func _show_next_message(duration: float = 2.0) -> void:
 		hide()
 		return
 
-	var text := message_queue.pop_front()
+	var text: String = message_queue.pop_front()
 	if label:
 		label.text = text
 	show()

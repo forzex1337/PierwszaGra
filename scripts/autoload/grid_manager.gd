@@ -107,9 +107,9 @@ func is_road(grid_pos: Vector2i) -> bool:
 # Pobierz sąsiadów (4 kierunki)
 func get_neighbors(grid_pos: Vector2i) -> Array[Vector2i]:
 	var neighbors: Array[Vector2i] = []
-	var directions := [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]
-	for dir in directions:
-		var neighbor := grid_pos + dir
+	var directions: Array[Vector2i] = [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]
+	for dir: Vector2i in directions:
+		var neighbor: Vector2i = grid_pos + dir
 		if is_in_bounds(neighbor):
 			neighbors.append(neighbor)
 	return neighbors

@@ -70,8 +70,8 @@ func _handle_touch(event: InputEventScreenTouch) -> void:
 			camera_start_pos = camera.position
 		elif touches.size() == 2:
 			# Dwa palce - start pinch zoom
-			var touch_positions := touches.values()
-			initial_pinch_distance = touch_positions[0].distance_to(touch_positions[1])
+			var touch_positions: Array = touches.values()
+			initial_pinch_distance = (touch_positions[0] as Vector2).distance_to(touch_positions[1] as Vector2)
 			initial_zoom = camera.zoom
 	else:
 		# Palec podniesiony
@@ -91,11 +91,11 @@ func _handle_drag(event: InputEventScreenDrag) -> void:
 		_clamp_camera()
 	elif touches.size() == 2:
 		# Pinch zoom
-		var touch_positions := touches.values()
-		var current_distance := touch_positions[0].distance_to(touch_positions[1])
+		var touch_positions: Array = touches.values()
+		var current_distance: float = (touch_positions[0] as Vector2).distance_to(touch_positions[1] as Vector2)
 		if initial_pinch_distance > 0:
-			var zoom_factor := current_distance / initial_pinch_distance
-			var new_zoom := initial_zoom * zoom_factor
+			var zoom_factor: float = current_distance / initial_pinch_distance
+			var new_zoom: Vector2 = initial_zoom * zoom_factor
 			camera.zoom = new_zoom.clamp(Vector2(MIN_ZOOM, MIN_ZOOM), Vector2(MAX_ZOOM, MAX_ZOOM))
 
 func _handle_mouse_button(event: InputEventMouseButton) -> void:
