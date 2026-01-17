@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nInitial project setup for GridTopia - isometric city builder\n\n- Godot 4.3 project structure with mobile configuration\n- Core autoload systems: GameManager, GridManager, BuildSystem, Simulation, SaveSystem\n- Isometric grid \\(32x32\\) with world/grid coordinate conversion\n- Building placement with road connectivity validation\n- Economy simulation with tick-based income, population growth, happiness\n- Mobile controls: pan \\(1 finger\\), pinch zoom \\(2 fingers\\)\n- UI: HUD, build menu, building info panel, message popups\n- 4 starter buildings: road, house, factory, shop\n- JSON save/load system with auto-save\n- Project roadmap documentation\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd comprehensive game design document\n\n- Complete feature list for GridTopia city builder\n- 40+ planned buildings across 6 categories\n- City level progression system \\(10 levels\\)\n- Economy and happiness mechanics detailed\n- UI/UX specifications for mobile\n- Implementation roadmap in 5 phases\n- Post-MVP features planning\nEOF\n\\)\")",
+      "Bash(git pull:*)"
+    ]
+  }
+}
