@@ -4,6 +4,9 @@ class_name Building
 
 signal clicked(building: Building)
 
+const Building3DViewScene = preload("res://scenes/building_3d_view.tscn")
+const RoadVisualScene = preload("res://scenes/road_visual.tscn")
+
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var placeholder: ColorRect = $Placeholder
 @onready var connection_indicator: ColorRect = $ConnectionIndicator
@@ -11,6 +14,8 @@ signal clicked(building: Building)
 var building_data: BuildingData
 var grid_position: Vector2i
 var is_connected_to_road: bool = false
+var building_3d_view: Building3DView = null
+var road_visual: RoadVisual = null
 
 func _ready() -> void:
 	# Ukryj indicator na start
@@ -21,8 +26,9 @@ func setup(data: BuildingData, grid_pos: Vector2i) -> void:
 	building_data = data
 	grid_position = grid_pos
 
-	# Ustaw pozycję w świecie
-	position = GridManager.grid_to_world(grid_pos)
+	# Ustaw pozycję w świecie (środek komórki)
+	# grid_to_world zwraca górny wierzchołek, dodajemy offset do centrum
+	position = GridManager.grid_to_world(grid_pos) + Vector2(0, GridManager.CELL_HEIGHT / 2)
 
 	# Ustaw wygląd
 	_setup_visuals()
@@ -34,32 +40,69 @@ func _setup_visuals() -> void:
 	if not building_data:
 		return
 
-	# Rozmiar placeholder na podstawie footprint
-	var footprint := building_data.footprint
-	var width := footprint.x * GridManager.CELL_WIDTH
-	var height := footprint.y * GridManager.CELL_HEIGHT
+	# Pobierz węzły bezpośrednio (setup może być przed _ready)
+	var _sprite: Sprite2D = get_node_or_null("Sprite2D")
+	var _placeholder: ColorRect = get_node_or_null("Placeholder")
 
-	# Jeśli jest sprite, użyj go
-	if building_data.sprite and sprite:
-		sprite.texture = building_data.sprite
-		sprite.visible = true
-		if placeholder:
-			placeholder.visible = false
+	# Ukryj domyślne elementy
+	if _sprite:
+		_sprite.visible = false
+	if _placeholder:
+		_placeholder.visible = false
+
+	# Priorytet: 1) Droga (specjalna wizualizacja), 2) Model 3D, 3) Sprite 2D, 4) Placeholder
+	if building_data.building_type == "road":
+		_setup_road_visual()
+	elif building_data.model_path and not building_data.model_path.is_empty():
+		_setup_3d_model()
+	elif building_data.sprite and _sprite:
+		_sprite.texture = building_data.sprite
+		_sprite.visible = true
 	else:
 		# Użyj placeholder z kolorem
-		if placeholder:
-			placeholder.color = building_data.color
+		if _placeholder:
+			_placeholder.color = building_data.color
 			# Rozmiar izometryczny (rombus-like)
-			placeholder.size = Vector2(GridManager.CELL_WIDTH * 0.8, GridManager.CELL_HEIGHT * 0.8)
-			placeholder.position = Vector2(-placeholder.size.x / 2, -placeholder.size.y / 2)
-			placeholder.visible = true
-		if sprite:
-			sprite.visible = false
+			_placeholder.size = Vector2(GridManager.CELL_WIDTH * 0.8, GridManager.CELL_HEIGHT * 0.8)
+			_placeholder.position = Vector2(-_placeholder.size.x / 2, -_placeholder.size.y / 2)
+			_placeholder.visible = true
+
+func _setup_road_visual() -> void:
+	# Ukryj placeholder (pobierz bezpośrednio)
+	var _placeholder: ColorRect = get_node_or_null("Placeholder")
+	if _placeholder:
+		_placeholder.visible = false
+
+	# Stwórz wizualizację drogi
+	if not road_visual:
+		road_visual = RoadVisualScene.instantiate()
+		road_visual.grid_position = grid_position
+		add_child(road_visual)
+
+	# Aktualizuj połączenia (po dodaniu do drzewa)
+	road_visual.call_deferred("update_connections")
+
+func _setup_3d_model() -> void:
+	# Stwórz widok 3D jeśli nie istnieje
+	if not building_3d_view:
+		building_3d_view = Building3DViewScene.instantiate()
+		add_child(building_3d_view)
+
+	# Załaduj model
+	building_3d_view.load_model(building_data.model_path, building_data.footprint)
+
+	# Pozycjonuj viewport - wycentruj na pozycji budynku
+	# Viewport 128x128, środek viewportu = środek renderowanego budynku
+	# Przesuwamy tak żeby środek viewportu był na pozycji grida
+	building_3d_view.position = Vector2(-64, -64)
 
 func update_road_connection() -> void:
 	# Drogi są zawsze "podłączone"
 	if building_data.building_type == "road":
 		is_connected_to_road = true
+		# Aktualizuj wizualizację drogi (połączenia z sąsiadami)
+		if road_visual:
+			road_visual.update_connections()
 		_update_connection_visual()
 		return
 

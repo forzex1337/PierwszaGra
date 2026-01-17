@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BuildingData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/building_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "office"
+display_name = "Biurowiec"
+description = "Nowoczesny biurowiec z 50 miejscami pracy"
+building_type = "commercial"
+model_path = "res://assets/models/buildings/Office_2x2_8F.glb"
+color = Color(0.4, 0.5, 0.7, 1)
+footprint = Vector2i(2, 2)
+cost = 6000
+upkeep = 50
+population_capacity = 0
+jobs_capacity = 50
+happiness_bonus = 2.0
+requires_road = true
+min_population = 100

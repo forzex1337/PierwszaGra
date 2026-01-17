@@ -27,8 +27,11 @@ func _load_building_resources() -> void:
 	var paths := [
 		"res://resources/buildings/road.tres",
 		"res://resources/buildings/house.tres",
+		"res://resources/buildings/apartment_small.tres",
+		"res://resources/buildings/apartment.tres",
+		"res://resources/buildings/shop.tres",
 		"res://resources/buildings/factory.tres",
-		"res://resources/buildings/shop.tres"
+		"res://resources/buildings/office.tres"
 	]
 
 	for path in paths:

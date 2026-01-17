@@ -19,9 +19,6 @@ script = ExtResource("2")
 [node name="BuildCursor" type="Node2D" parent="."]
 visible = false
 
-[node name="CursorRect" type="ColorRect" parent="BuildCursor"]
-offset_left = -48.0
-offset_top = -24.0
-offset_right = 48.0
-offset_bottom = 24.0
+[node name="CursorRect" type="Polygon2D" parent="BuildCursor"]
 color = Color(0, 1, 0, 0.5)
+polygon = PackedVector2Array(0, -32, 64, 0, 0, 32, -64, 0)

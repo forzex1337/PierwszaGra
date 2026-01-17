@@ -8,6 +8,7 @@ id = "house"
 display_name = "Dom"
 description = "Mały dom mieszkalny dla 4 osób"
 building_type = "residential"
+model_path = "res://assets/models/buildings/House_1x1_2F.glb"
 color = Color(0.2, 0.6, 0.2, 1)
 footprint = Vector2i(1, 1)
 cost = 500

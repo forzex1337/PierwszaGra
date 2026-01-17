@@ -13,7 +13,8 @@ extends Resource
 @export_category("Wygląd")
 @export var icon: Texture2D
 @export var sprite: Texture2D
-@export var color: Color = Color.WHITE  # Kolor placeholder jeśli brak sprite
+@export var model_path: String = ""  # Ścieżka do modelu 3D (.glb)
+@export var color: Color = Color.WHITE  # Kolor placeholder jeśli brak sprite/model
 
 @export_category("Rozmiar")
 @export var footprint: Vector2i = Vector2i(1, 1)  # Rozmiar na gridzie

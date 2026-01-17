@@ -163,17 +163,18 @@ func _update_build_cursor() -> void:
 	if not BuildSystem.is_build_mode:
 		return
 
-	# Pozycja kursora
+	# Pozycja kursora - grid_to_world zwraca górny wierzchołek komórki,
+	# dodajemy offset żeby wycentrować na środku komórki
 	var world_pos := GridManager.grid_to_world(cursor_grid_pos)
-	build_cursor.position = world_pos
+	build_cursor.position = world_pos + Vector2(0, GridManager.CELL_HEIGHT / 2)
 
 	# Sprawdź czy można budować
 	is_cursor_valid = BuildSystem.can_build_at(cursor_grid_pos)
 
-	# Zmień kolor kursora
-	var cursor_rect: ColorRect = build_cursor.get_node_or_null("CursorRect")
-	if cursor_rect:
-		cursor_rect.color = Color(0, 1, 0, 0.5) if is_cursor_valid else Color(1, 0, 0, 0.5)
+	# Zmień kolor kursora (Polygon2D w kształcie izometrycznego rombu)
+	var cursor_poly: Polygon2D = build_cursor.get_node_or_null("CursorRect")
+	if cursor_poly:
+		cursor_poly.color = Color(0, 1, 0, 0.5) if is_cursor_valid else Color(1, 0, 0, 0.5)
 
 func _draw_grid() -> void:
 	# Siatka jest rysowana przez GridOverlay

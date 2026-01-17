@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BuildingData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/building_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "apartment"
+display_name = "Blok mieszkalny"
+description = "Duży blok mieszkalny dla 40 osób"
+building_type = "residential"
+model_path = "res://assets/models/buildings/Apt_2x2_5F.glb"
+color = Color(0.75, 0.75, 0.8, 1)
+footprint = Vector2i(2, 2)
+cost = 4000
+upkeep = 40
+population_capacity = 40
+jobs_capacity = 0
+happiness_bonus = -2.0
+requires_road = true
+min_population = 50
